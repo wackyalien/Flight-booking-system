@@ -10,7 +10,6 @@ import com.micro.Flightsearch.repository.flightrepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
 @Service
 public class FlightServiceImpl implements FlightService{
 
@@ -22,8 +21,13 @@ public class FlightServiceImpl implements FlightService{
 
     @Override
     public String postdata(Flight flight) {
-        this.flightrepo.save(flight);
-        return "Successfully added";
+        try{
+            this.flightrepo.save(flight);
+            return "Successfully added";
+        }
+        catch(Exception e){
+            return "Wrong flight data";
+        }
     }
 
     @Override
@@ -72,22 +76,3 @@ public class FlightServiceImpl implements FlightService{
     }
     
 }
-
- // @Override
-    // public AvailableFlight getsearchflightwithfare(Flight flight) {
-    //     List<Flight> AvailableFLightList = new ArrayList<>();
-    //     var flightfare = restTemplate.getForObject("http://fare-search/fare/getAll/", FlightFare.class);
-    //     var f=flightfare.getFlightFare().stream().map(i->i.getFlightno()).collect(Collectors.toList());
-    //     for(var i:this.flightrepo.findAll()){
-    //         if(i.getFlightfrom().equals(flight.getFlightfrom()) 
-    //             && i.getFlightto().equals(flight.getFlightto())
-    //             && i.getDate().equals(flight.getDate())
-    //             && f.contains(i.getFlightno())){
-    //                 var index = i.getId();
-    //                 i.setFare(flightfare.getFlightFare().get(index-1).getFprice());
-    //                 AvailableFLightList.add(i);
-    //             }
-    //     }
-    //     AvailableFlight p = new AvailableFlight(AvailableFLightList);
-    //     return p;
-    // }

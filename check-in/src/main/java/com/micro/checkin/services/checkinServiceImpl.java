@@ -2,6 +2,7 @@ package com.micro.checkin.services;
 
 import java.util.Random;
 
+import com.micro.checkin.models.CheckingMessage;
 import com.micro.checkin.models.User;
 import com.micro.checkin.repository.Userrepo;
 
@@ -23,15 +24,14 @@ public class checkinServiceImpl implements checkinService{
     }
 
     @Override
-    public String checkin(int id) {
-        User user=this.restTemplate.getForObject("http://booking-service/booking/search/"+id,User.class);
+    public CheckingMessage checkin(int id) { 
         Random rand = new Random();
         var rand1 = rand.nextInt(50-1) + 1;
         var rand2 = rand.nextInt(122-97)+97;
-        var checkin = "Checked In, Seat Number is "+rand1+toChar(rand2)+", checkedin id is "+ user.getId();
-        user.setCheckin(checkin);
-        this.userRepo.save(user);
-        return checkin;
+        var checkin = "Checked In, Seat Number is "+rand1+toChar(rand2)+", checkedin id is "+ id;
+        CheckingMessage obj = new CheckingMessage(id,checkin);
+        System.out.println(obj);
+        return obj;
     }
     
 }

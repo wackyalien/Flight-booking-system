@@ -14,6 +14,5 @@ public interface FlightService {
     public List<Flight> getdata();
     public Flight getdata(@PathVariable String flightNo);
     public String postdata(@RequestBody Flight flight);
-    // public AvailableFlight getsearchflightwithfare(@RequestBody Flight flight);
     public AvailableFlight getsearchflightwithfare(@RequestParam String flightfrom,@RequestParam String flightto,@RequestParam String date);
 }

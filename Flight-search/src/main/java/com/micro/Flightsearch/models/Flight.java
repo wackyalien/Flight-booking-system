@@ -1,5 +1,8 @@
 package com.micro.Flightsearch.models;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -7,9 +10,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Flight {
     @Id
     private int id;
+    // @NotBlank
     private String flightno;
+    // @NotBlank
     private String flightfrom;
+    // @NotBlank
     private String flightto;
+    // @NotBlank
     private String date;
     private String fare;
 

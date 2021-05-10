@@ -10,6 +10,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import com.micro.Booking.exception.IdNotFoundException;
 import com.micro.Booking.models.Flight;
 import com.micro.Booking.models.User;
 import com.micro.Booking.repository.Bookingrepo;
@@ -28,7 +29,11 @@ public class BookingServiceImpl implements BookingService{
 
     @Override
     public User getRefDetail(int id) {
-        return this.bookingrepo.findById(id);
+        User user=this.bookingrepo.findById(id);
+        if(user == null){
+            throw new IdNotFoundException("Invalid Id");
+        }
+        return user;
     }
 
     @Override
