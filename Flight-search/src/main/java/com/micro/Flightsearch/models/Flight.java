@@ -1,29 +1,27 @@
 package com.micro.Flightsearch.models;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 @Document
 public class Flight {
     @Id
     private int id;
-    // @NotBlank
+    @NotNull(message = "flightno is mandatory")
     private String flightno;
-    // @NotBlank
+    @NotNull(message = "flightfrom is mandatory")
     private String flightfrom;
-    // @NotBlank
+    @NotNull(message = "flightto is mandatory")
     private String flightto;
-    // @NotBlank
+    @NotNull(message = "date is mandatory")
     private String date;
-    private String fare;
+    private int fare;
 
     public Flight() {
     }
 
-    public Flight(int id, String flightno, String flightfrom, String flightto, String date, String fare) {
+    public Flight(int id, String flightno, String flightfrom, String flightto, String date, int fare) {
         this.id = id;
         this.flightno = flightno;
         this.flightfrom = flightfrom;
@@ -72,11 +70,11 @@ public class Flight {
         this.date = date;
     }
 
-    public String getFare() {
+    public int getFare() {
         return fare;
     }
 
-    public void setFare(String fare) {
+    public void setFare(int fare) {
         this.fare = fare;
     }
 

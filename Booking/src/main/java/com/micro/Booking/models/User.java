@@ -15,15 +15,14 @@ public class User {
     private String flightfrom;
     private String flightto;
     private String date;
-    private String fare;
+    private int fare;
     private String checkin;
     
-
     public User() {
     }
 
     public User(int id, String firstname, String lastname, String gender, String email, String flightno,
-            String flightfrom, String flightto, String date, String fare, String checkin) {
+            String flightfrom, String flightto, String date, int fare, String checkin) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -41,11 +40,9 @@ public class User {
         return checkin;
     }
 
-
     public void setCheckin(String checkin) {
         this.checkin = checkin;
     }
-
 
     public int getId() {
         return id;
@@ -119,11 +116,11 @@ public class User {
         this.date = date;
     }
 
-    public String getFare() {
+    public int getFare() {
         return fare;
     }
 
-    public void setFare(String fare) {
+    public void setFare(int fare) {
         this.fare = fare;
     }
 

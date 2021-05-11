@@ -63,7 +63,6 @@ public class mycontrols {
 
     @RabbitListener(queues = MessagingConfig.QUEUE)
     public void consumeMessageFromQueue(CheckingMessage message){
-        System.out.println("Message recieved from queue : " + message);
         int id = message.getId();
         User user = this.bookingrepo.findById(id);
         System.out.println(user);

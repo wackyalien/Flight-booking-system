@@ -3,21 +3,14 @@ package com.micro.checkin.services;
 import java.util.Random;
 
 import com.micro.checkin.models.CheckingMessage;
-import com.micro.checkin.models.User;
-import com.micro.checkin.repository.Userrepo;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 @Service
 public class checkinServiceImpl implements checkinService{
 
-    @Autowired
-    private RestTemplate restTemplate;
-
-    @Autowired
-    private Userrepo userRepo;
+    Logger logger = Logger.getLogger(checkinServiceImpl.class);
 
     public char toChar(int c) {
         return (char)c;
@@ -25,6 +18,7 @@ public class checkinServiceImpl implements checkinService{
 
     @Override
     public CheckingMessage checkin(int id) { 
+        logger.info("Sending asyn message to booking microservice using rabbitmq");
         Random rand = new Random();
         var rand1 = rand.nextInt(50-1) + 1;
         var rand2 = rand.nextInt(122-97)+97;

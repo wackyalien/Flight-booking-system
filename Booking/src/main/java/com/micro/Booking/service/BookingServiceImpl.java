@@ -14,12 +14,16 @@ import com.micro.Booking.exception.IdNotFoundException;
 import com.micro.Booking.models.Flight;
 import com.micro.Booking.models.User;
 import com.micro.Booking.repository.Bookingrepo;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
 public class BookingServiceImpl implements BookingService{
+
+    Logger logger = Logger.getLogger(BookingServiceImpl.class);
 
     @Autowired
     private RestTemplate restTemplate;
@@ -29,6 +33,7 @@ public class BookingServiceImpl implements BookingService{
 
     @Override
     public User getRefDetail(int id) {
+        logger.info("search by id");
         User user=this.bookingrepo.findById(id);
         if(user == null){
             throw new IdNotFoundException("Invalid Id");
@@ -38,6 +43,7 @@ public class BookingServiceImpl implements BookingService{
 
     @Override
     public String getspecificflight(String flightno, String firstname, String lastname, String gender, String email) {
+        logger.info("book flight for user");
         int count=this.bookingrepo.findAll().size();
         Flight flight = this.restTemplate.getForObject("http://flight-search/flight/"+flightno, Flight.class);
         User user = new User();
@@ -89,19 +95,3 @@ public class BookingServiceImpl implements BookingService{
         return "Check booking details on your Email";
     }
 }
-
-
-// @Override
-    // public String getspecificflight(String flightno, User user) {
-    //     int count=this.bookingrepo.findAll().size();
-    //     Flight flight = this.restTemplate.getForObject("http://flight-search/flight/"+flightno, Flight.class);
-    //     user.setFlightno(flightno);
-    //     user.setFlightfrom(flight.getFlightfrom());
-    //     user.setFlightto(flight.getFlightto());
-    //     user.setDate(flight.getDate());
-    //     user.setFare(flight.getFare());
-    //     user.setId(count+1);
-    //     this.bookingrepo.save(user);
-    //     return "Your booking is confirmed. Reference number is "+user.getId();
-    // }
-

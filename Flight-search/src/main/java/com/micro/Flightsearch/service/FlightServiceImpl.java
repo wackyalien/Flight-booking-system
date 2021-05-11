@@ -7,11 +7,15 @@ import com.micro.Flightsearch.models.Fare;
 import com.micro.Flightsearch.models.Flight;
 import com.micro.Flightsearch.models.FlightFare;
 import com.micro.Flightsearch.repository.flightrepo;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 @Service
 public class FlightServiceImpl implements FlightService{
+
+    Logger logger = Logger.getLogger(FlightServiceImpl.class);
 
     @Autowired
     private RestTemplate restTemplate;
@@ -50,6 +54,7 @@ public class FlightServiceImpl implements FlightService{
 
     @Override
     public AvailableFlight getsearchflightwithfare(String flightfrom, String flightto, String date) {
+        logger.info("flight search by from, to and date");
         List<Flight> AvailableFLightList = new ArrayList<>();
         var flightfare = restTemplate.getForObject("http://fare-search/fare/getAll/", FlightFare.class);
         var f=flightfare.getFlightFare().stream().map(i->i.getFlightno()).collect(Collectors.toList());

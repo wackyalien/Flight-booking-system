@@ -1,31 +1,43 @@
 package com.micro.Faresearch.models;
 
+
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Fare {
     @Id
-    private int id;
+    private ObjectId _id;
+    @NotNull(message = "flightno is mandatory")
     private String flightno;
-    private String fprice;
+    @Min(value=1, message="must be equal or greater than 1")
+    private int fprice;
 
     public Fare() {
     }
 
-    public Fare(int id, String flightno, String fprice) {
-        this.id = id;
+    
+    public Fare(ObjectId _id, String flightno, int fprice) {
+        this._id = _id;
         this.flightno = flightno;
         this.fprice = fprice;
     }
 
-    public int getId() {
-        return id;
+
+    public ObjectId get_id() {
+        return _id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+
+    public void set_id(ObjectId _id) {
+        this._id = _id;
     }
+
 
     public String getFlightno() {
         return flightno;
@@ -35,17 +47,17 @@ public class Fare {
         this.flightno = flightno;
     }
 
-    public String getFprice() {
+    public int getFprice() {
         return fprice;
     }
 
-    public void setFprice(String fprice) {
+    public void setFprice(int fprice) {
         this.fprice = fprice;
     }
 
     @Override
     public String toString() {
-        return "Fare [flightno=" + flightno + ", fprice=" + fprice + ", id=" + id + "]";
+        return "Fare [_id=" + _id + ", flightno=" + flightno + ", fprice=" + fprice + "]";
     }
-  
+
 }
