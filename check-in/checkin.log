@@ -1,3 +1,16 @@
 INFO  checkinServiceImpl - (checkinServiceImpl.java:21) Sending asyn message to booking microservice using rabbitmq
 INFO  checkinServiceImpl - (checkinServiceImpl.java:21) Sending asyn message to booking microservice using rabbitmq
 INFO  checkinServiceImpl - (checkinServiceImpl.java:21) Sending asyn message to booking microservice using rabbitmq
+INFO  checkinServiceImpl - (checkinServiceImpl.java:28) Sending asyn message to booking microservice using rabbitmq
+INFO  checkinServiceImpl - (checkinServiceImpl.java:28) Sending asyn message to booking microservice using rabbitmq
+ERROR checkinServiceImpl - (checkinServiceImpl.java:40) Checkin id is failed
+INFO  checkinServiceImpl - (checkinServiceImpl.java:28) Sending asyn message to booking microservice using rabbitmq
+ERROR checkinServiceImpl - (checkinServiceImpl.java:40) Checkin id is failed
+INFO  checkinServiceImpl - (checkinServiceImpl.java:28) Sending asyn message to booking microservice using rabbitmq
+ERROR checkinServiceImpl - (checkinServiceImpl.java:40) Checkin id is failed
+INFO  checkinServiceImpl - (checkinServiceImpl.java:28) Sending asyn message to booking microservice using rabbitmq
+ERROR checkinServiceImpl - (checkinServiceImpl.java:40) Checkin id is failed
+INFO  checkinServiceImpl - (checkinServiceImpl.java:28) Sending asyn message to booking microservice using rabbitmq
+ERROR checkinServiceImpl - (checkinServiceImpl.java:40) Checkin id is failed
+INFO  checkinServiceImpl - (checkinServiceImpl.java:28) Sending asyn message to booking microservice using rabbitmq
+ERROR checkinServiceImpl - (checkinServiceImpl.java:40) Checkin id is failed
