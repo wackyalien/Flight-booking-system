@@ -1,0 +1,3 @@
+INFO  checkinServiceImpl - (checkinServiceImpl.java:21) Sending asyn message to booking microservice using rabbitmq
+INFO  checkinServiceImpl - (checkinServiceImpl.java:21) Sending asyn message to booking microservice using rabbitmq
+INFO  checkinServiceImpl - (checkinServiceImpl.java:21) Sending asyn message to booking microservice using rabbitmq

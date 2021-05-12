@@ -2,28 +2,19 @@ package com.micro.Flightsearch.models;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class FlightFare {
     
     private List<Fare> flightFare;
-
-    public FlightFare() {
-    }
-
-    public FlightFare(List<Fare> flightFare) {
-        this.flightFare = flightFare;
-    }
-
-    public List<Fare> getFlightFare() {
-        return flightFare;
-    }
-
-    public void setFlightFare(List<Fare> flightFare) {
-        this.flightFare = flightFare;
-    }
-
-    @Override
-    public String toString() {
-        return "FlightFare [flightFare=" + flightFare + "]";
-    }
 
 }

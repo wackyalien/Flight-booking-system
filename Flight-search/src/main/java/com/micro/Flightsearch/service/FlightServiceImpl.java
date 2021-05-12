@@ -25,6 +25,7 @@ public class FlightServiceImpl implements FlightService{
 
     @Override
     public String postdata(Flight flight) {
+        logger.info("post data of flight");
         try{
             this.flightrepo.save(flight);
             return "Successfully added";
@@ -41,6 +42,7 @@ public class FlightServiceImpl implements FlightService{
 
     @Override
     public List<Flight> getallflight() {
+        logger.info("show all flights");
         var flightfare = restTemplate.getForObject("http://fare-search/fare/getAll/", FlightFare.class);
         var f=flightfare.getFlightFare().stream().map(i->i.getFlightno()).collect(Collectors.toList());
         for(var i:this.flightrepo.findAll()){
@@ -74,6 +76,7 @@ public class FlightServiceImpl implements FlightService{
 
     @Override
     public Flight getdata(String flightNo) {
+        logger.info("search flight by flightno");
         var fare = this.restTemplate.getForObject("http://fare-search/fare/"+flightNo, Fare.class);
         Flight flight=this.flightrepo.findByFlightno(flightNo);
         flight.setFare(fare.getFprice());
