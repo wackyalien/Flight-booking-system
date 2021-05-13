@@ -1,6 +1,7 @@
 package com.micro.Booking.service;
 
 import java.util.Properties;
+import java.util.Random;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -44,54 +45,62 @@ public class BookingServiceImpl implements BookingService{
     @Override
     public String getspecificflight(String flightno, String firstname, String lastname, String gender, String email) {
         logger.info("book flight for user");
-        int count=this.bookingrepo.findAll().size();
-        Flight flight = this.restTemplate.getForObject("http://flight-search/flight/"+flightno, Flight.class);
-        User user = new User();
-        user.setFirstname(firstname);
-        user.setLastname(lastname);
-        user.setGender(gender);
-        user.setEmail(email);
-        user.setFlightno(flightno);
-        user.setFlightfrom(flight.getFlightfrom());
-        user.setFlightto(flight.getFlightto());
-        user.setDate(flight.getDate());
-        user.setFare(flight.getFare());
-        user.setId(count+1);
-        this.bookingrepo.save(user);
+        Random rand = new Random();
+        var payment = rand.nextInt(2-0) + 0;
+        if(payment==1){
+            int count=this.bookingrepo.findAll().size();
+            Flight flight = this.restTemplate.getForObject("http://flight-search/flight/"+flightno, Flight.class);
+            User user = new User();
+            user.setFirstname(firstname);
+            user.setLastname(lastname);
+            user.setGender(gender);
+            user.setEmail(email);
+            user.setFlightno(flightno);
+            user.setFlightfrom(flight.getFlightfrom());
+            user.setFlightto(flight.getFlightto());
+            user.setDate(flight.getDate());
+            user.setFare(flight.getFare());
+            user.setId(count+1);
+            this.bookingrepo.save(user);
 
-        String sender = "kunaljain5021@gmail.com";
-        String host = "smtp.gmail.com";
-        Properties properties = System.getProperties();
-        properties.put("mail.smtp.host", host);
-        properties.put("mail.smtp.port", "465");
-        properties.put("mail.smtp.ssl.enable", "true");
-        properties.put("mail.smtp.auth", "true");
-        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+            String sender = "kunaljain5021@gmail.com";
+            String host = "smtp.gmail.com";
+            Properties properties = System.getProperties();
+            properties.put("mail.smtp.host", host);
+            properties.put("mail.smtp.port", "465");
+            properties.put("mail.smtp.ssl.enable", "true");
+            properties.put("mail.smtp.auth", "true");
+            Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
 
-            protected PasswordAuthentication getPasswordAuthentication() {
+                protected PasswordAuthentication getPasswordAuthentication() {
 
-                return new PasswordAuthentication("kunaljain5021@gmail.com", "Kuttabhaiya1");
+                    return new PasswordAuthentication("kunaljain5021@gmail.com", "Kuttabhaiya1");
 
+                }
+
+            });
+
+            session.setDebug(true);
+
+            try 
+            {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(sender));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+            message.setSubject("Ticket Confirmation");
+            message.setText("Your booking is confirmed. Reference number is "+user.getId());
+            Transport.send(message);
+            System.out.println("Mail successfully sent");
             }
-
-        });
-
-        session.setDebug(true);
-
-        try 
-        {
-           MimeMessage message = new MimeMessage(session);
-           message.setFrom(new InternetAddress(sender));
-           message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
-           message.setSubject("Ticket Confirmation");
-           message.setText("Your booking is confirmed. Reference number is "+user.getId());
-           Transport.send(message);
-           System.out.println("Mail successfully sent");
+            catch (MessagingException mex) 
+            {
+            mex.printStackTrace();
+            }
+            return "Check booking details on your Email";
         }
-        catch (MessagingException mex) 
-        {
-           mex.printStackTrace();
+        else{
+            return "Payment failed";
         }
-        return "Check booking details on your Email";
     }
+        
 }

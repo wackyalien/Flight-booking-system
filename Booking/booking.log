@@ -14,3 +14,9 @@ INFO  BookingServiceImpl - (BookingServiceImpl.java:46) book flight for user
 INFO  BookingServiceImpl - (BookingServiceImpl.java:36) search by id
 INFO  BookingServiceImpl - (BookingServiceImpl.java:36) search by id
 INFO  BookingServiceImpl - (BookingServiceImpl.java:36) search by id
+INFO  BookingServiceImpl - (BookingServiceImpl.java:46) book flight for user
+INFO  BookingServiceImpl - (BookingServiceImpl.java:36) search by id
+INFO  BookingServiceImpl - (BookingServiceImpl.java:36) search by id
+INFO  BookingServiceImpl - (BookingServiceImpl.java:46) book flight for user
+INFO  BookingServiceImpl - (BookingServiceImpl.java:36) search by id
+INFO  BookingServiceImpl - (BookingServiceImpl.java:36) search by id

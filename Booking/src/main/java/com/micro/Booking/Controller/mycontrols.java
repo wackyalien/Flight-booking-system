@@ -1,5 +1,7 @@
 package com.micro.Booking.Controller;
 
+import java.util.Random;
+
 import com.micro.Booking.config.MessagingConfig;
 import com.micro.Booking.models.AuthenticationRequest;
 import com.micro.Booking.models.AuthenticationResponse;
@@ -47,6 +49,8 @@ public class mycontrols {
 
     @GetMapping("/hello")
     public ResponseEntity<String> hello(){
+        Random rand = new Random();
+        System.out.println(rand.nextInt(2-0) + 0);
         return new ResponseEntity<String>("running booking service",HttpStatus.OK);
     }
 

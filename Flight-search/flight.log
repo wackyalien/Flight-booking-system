@@ -14,3 +14,7 @@ INFO  FlightServiceImpl - (FlightServiceImpl.java:59) flight search by from, to 
 INFO  FlightServiceImpl - (FlightServiceImpl.java:79) search flight by flightno
 INFO  FlightServiceImpl - (FlightServiceImpl.java:59) flight search by from, to and date
 INFO  FlightServiceImpl - (FlightServiceImpl.java:59) flight search by from, to and date
+INFO  FlightServiceImpl - (FlightServiceImpl.java:59) flight search by from, to and date
+INFO  FlightServiceImpl - (FlightServiceImpl.java:79) search flight by flightno
+INFO  FlightServiceImpl - (FlightServiceImpl.java:59) flight search by from, to and date
+INFO  FlightServiceImpl - (FlightServiceImpl.java:79) search flight by flightno

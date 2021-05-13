@@ -19,6 +19,6 @@ public class BookingApplication {
 	@LoadBalanced
 	public RestTemplate gettemplate(){
 		return new RestTemplate();
-	} 
+	}
 
 }
