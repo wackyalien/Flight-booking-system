@@ -19,6 +19,11 @@ spring:
                   uri: lb://flight-search
                   predicates:
                     - Path=/flight/**
+                  filters:
+                    - name: CircuitBreaker
+                      args:
+                        name: fallbackCommand
+                        fallbackuri: forward:/fallback/message
                 - id: booking-service
                   uri: lb://booking-service
                   predicates:
@@ -27,5 +32,8 @@ spring:
                   uri: lb://check-in
                   predicates:
                     - Path=/**   
+
+
+
 
 

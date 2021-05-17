@@ -70,8 +70,8 @@ public class FlightServiceImpl implements FlightService{
                     AvailableFLightList.add(i);
             }
         }
-        AvailableFlight p = new AvailableFlight(AvailableFLightList);
-        return p;
+        AvailableFlight availableFlight = new AvailableFlight(AvailableFLightList);
+        return availableFlight;
     }
 
     @Override
