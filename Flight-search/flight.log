@@ -124,3 +124,23 @@ INFO  FlightServiceImpl - (FlightServiceImpl.java:79) search flight by flightno
 INFO  FlightServiceImpl - (FlightServiceImpl.java:59) flight search by from, to and date
 INFO  FlightServiceImpl - (FlightServiceImpl.java:59) flight search by from, to and date
 INFO  FlightServiceImpl - (FlightServiceImpl.java:59) flight search by from, to and date
+INFO  FlightServiceImpl - (FlightServiceImpl.java:79) search flight by flightno
+INFO  FlightServiceImpl - (FlightServiceImpl.java:79) search flight by flightno
+INFO  FlightServiceImpl - (FlightServiceImpl.java:79) search flight by flightno
+INFO  FlightServiceImpl - (FlightServiceImpl.java:59) flight search by from, to and date
+INFO  FlightServiceImpl - (FlightServiceImpl.java:45) show all flights
+INFO  FlightServiceImpl - (FlightServiceImpl.java:79) search flight by flightno
+INFO  FlightServiceImpl - (FlightServiceImpl.java:59) flight search by from, to and date
+INFO  FlightServiceImpl - (FlightServiceImpl.java:59) flight search by from, to and date
+INFO  FlightServiceImpl - (FlightServiceImpl.java:59) flight search by from, to and date
+INFO  FlightServiceImpl - (FlightServiceImpl.java:59) flight search by from, to and date
+INFO  FlightServiceImpl - (FlightServiceImpl.java:79) search flight by flightno
+INFO  FlightServiceImpl - (FlightServiceImpl.java:28) post data of flight
+INFO  FlightServiceImpl - (FlightServiceImpl.java:59) flight search by from, to and date
+INFO  FlightServiceImpl - (FlightServiceImpl.java:79) search flight by flightno
+INFO  FlightServiceImpl - (FlightServiceImpl.java:59) flight search by from, to and date
+INFO  FlightServiceImpl - (FlightServiceImpl.java:59) flight search by from, to and date
+INFO  FlightServiceImpl - (FlightServiceImpl.java:59) flight search by from, to and date
+INFO  FlightServiceImpl - (FlightServiceImpl.java:59) flight search by from, to and date
+INFO  FlightServiceImpl - (FlightServiceImpl.java:59) flight search by from, to and date
+INFO  FlightServiceImpl - (FlightServiceImpl.java:59) flight search by from, to and date

@@ -100,4 +100,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
         ApiErrors errors = new ApiErrors(message,details,HttpStatus.NOT_FOUND,LocalDateTime.now());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Object> handleexception(Exception ex){
+        String message=ex.getMessage();
+        List<String> details=new ArrayList<>();
+        details.add("other exception");
+        ApiErrors apiErrors=new ApiErrors(message,details,HttpStatus.BAD_REQUEST, LocalDateTime.now());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiErrors);
+    }
 }

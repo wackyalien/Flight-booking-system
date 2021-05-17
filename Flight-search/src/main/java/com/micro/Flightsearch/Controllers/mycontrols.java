@@ -7,14 +7,23 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import com.micro.Flightsearch.models.Audience;
+import com.micro.Flightsearch.models.AuthenticationRequest;
+import com.micro.Flightsearch.models.AuthenticationResponse;
 import com.micro.Flightsearch.models.AvailableFlight;
 import com.micro.Flightsearch.models.Flight;
 import com.micro.Flightsearch.repository.AudienceRepo;
 import com.micro.Flightsearch.service.FlightService;
+import com.micro.Flightsearch.service.MyUserDetailsService;
+import com.micro.Flightsearch.util.JwtUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -24,6 +33,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,6 +42,15 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RequestMapping("/flight")
 public class mycontrols {
+
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @Autowired
+    MyUserDetailsService myUserDetailsService;
+
+    @Autowired
+    JwtUtil jwtTokenUtil;
 
     @Autowired
     private FlightService flightService;
@@ -44,6 +63,7 @@ public class mycontrols {
         return "Running Flight Search MicroService";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/")
     public String postdata(@RequestBody @Valid Flight flight){
             return this.flightService.postdata(flight);
@@ -55,6 +75,7 @@ public class mycontrols {
         return "Data updated";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/all")
     public List<Flight> getallflight(){
         return this.flightService.getallflight();
@@ -72,6 +93,25 @@ public class mycontrols {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.ok(availableflight);
+    }
+
+    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
+            );
+        }
+        catch (BadCredentialsException e){
+            throw new Exception("Incorrect UserName or Password !",e);
+        }
+
+        final UserDetails userDetails = myUserDetailsService
+                .loadUserByUsername(authenticationRequest.getUsername());
+
+        final String jwt = jwtTokenUtil.generateToken(userDetails);
+
+        return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

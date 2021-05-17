@@ -22,5 +22,6 @@ public class Audience {
     private ObjectId _id;
     private String username;
     private String password;
+    private String role;
 
 }

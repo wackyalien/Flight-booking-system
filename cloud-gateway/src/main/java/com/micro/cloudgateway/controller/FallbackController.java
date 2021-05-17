@@ -10,7 +10,7 @@ public class FallbackController {
 
     @GetMapping("/message")
     public String FlightFallback() {
-        return "Flight Service is down at this moment, please try later."; 
+        return "Service is down at this moment, please try again later."; 
     }
       
 }

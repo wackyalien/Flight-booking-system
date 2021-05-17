@@ -16,6 +16,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -54,11 +55,13 @@ public class mycontrols {
         return new ResponseEntity<String>("running booking service",HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @GetMapping("/{flightno}")
     public String getspecificflight(@PathVariable String flightno, @RequestParam String firstname,@RequestParam String lastname,@RequestParam String gender,@RequestParam String email){
         return this.bookingService.getspecificflight(flightno, firstname, lastname, gender, email);
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @GetMapping("/search/{id}")
     public ResponseEntity<User> run(@PathVariable int id){
         User user =this.bookingService.getRefDetail(id);

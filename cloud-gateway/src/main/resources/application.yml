@@ -28,10 +28,20 @@ spring:
                   uri: lb://booking-service
                   predicates:
                     - Path=/booking/**
+                  filters:
+                    - name: CircuitBreaker
+                      args:
+                        name: fallbackCommand
+                        fallbackuri: forward:/fallback/message
                 - id: check-in
                   uri: lb://check-in
                   predicates:
-                    - Path=/**   
+                    - Path=/**
+                  filters:
+                    - name: CircuitBreaker
+                      args:
+                        name: fallbackCommand
+                        fallbackuri: forward:/fallback/message 
 
 
 
