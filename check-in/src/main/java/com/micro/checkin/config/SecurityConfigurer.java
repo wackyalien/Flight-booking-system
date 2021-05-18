@@ -32,7 +32,12 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeRequests().antMatchers("/authenticate").permitAll()
+                .authorizeRequests().antMatchers("/authenticate","/v2/api-docs",
+                                                "/configuration/ui",
+                                                "/swagger-resources/**",
+                                                "/configuration/security",
+                                                "/swagger-ui.html",
+                                                "/webjars/**").permitAll()
                 .antMatchers("/{id}/checkin").hasAuthority("USER")
                 .anyRequest().authenticated()
                 .and().sessionManagement()

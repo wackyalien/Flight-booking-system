@@ -1,6 +1,6 @@
 package com.micro.bookings.models;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -21,13 +21,14 @@ public class User {
     
     @Id
     private int id;
-    @NotNull(message = "Firstname is mandatory")
+    @NotBlank(message = "Firstname is mandatory")
     private String firstname;
-    @NotNull(message = "Lastname is mandatory")
+    @NotBlank(message = "Lastname is mandatory")
     private String lastname;
-    @NotNull(message = "Gender is mandatory")
+    @NotBlank(message = "Gender is mandatory")
     private String gender;
-    @NotNull(message = "Email is mandatory")
+    @NotBlank(message = "Email is mandatory")
+    @Email(message = "Invalid emailId")
     private String email;
     private String flightno;
     private String flightfrom;

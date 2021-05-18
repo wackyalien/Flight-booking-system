@@ -5,6 +5,7 @@ import java.util.*;
 
 import com.micro.flightsearches.models.ApiErrors;
 
+import org.springframework.validation.FieldError;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -43,14 +44,29 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
         return ResponseEntity.status(status).body(errors);
     }
 
+    // @Override
+    // protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+    //         HttpHeaders headers, HttpStatus status, WebRequest request) {
+    //         String message = ex.getMessage();
+    //         List<String> details= new ArrayList<>();
+    //         details.add("Data is not valid");
+    //         ApiErrors errors = new ApiErrors(message,details,status,LocalDateTime.now());
+    //         return ResponseEntity.status(status).body(errors);
+    // }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
             HttpHeaders headers, HttpStatus status, WebRequest request) {
-            String message = ex.getMessage();
-            List<String> details= new ArrayList<>();
-            details.add("Data is not valid");
-            ApiErrors errors = new ApiErrors(message,details,status,LocalDateTime.now());
-            return ResponseEntity.status(status).body(errors);
+ 
+        logger.error(ex.getMessage());
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        ResponseEntity<Object> entity = new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        return entity;
     }
 
     @Override

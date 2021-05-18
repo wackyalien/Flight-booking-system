@@ -2,6 +2,8 @@ package com.micro.bookings.controllers;
 
 import java.util.Random;
 
+import javax.validation.Valid;
+
 import com.micro.bookings.config.MessagingConfig;
 import com.micro.bookings.models.AuthenticationRequest;
 import com.micro.bookings.models.AuthenticationResponse;
@@ -21,6 +23,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Validated
 @RequestMapping("/booking")
 public class MyControl{
 
@@ -57,8 +61,8 @@ public class MyControl{
 
     @PreAuthorize("hasAuthority('USER')")
     @GetMapping("/{flightno}")
-    public String getSpecificFlight(@PathVariable String flightno, @RequestParam String firstname,@RequestParam String lastname,@RequestParam String gender,@RequestParam String email){
-        return this.bookingService.getSpecificFlight(flightno, firstname, lastname, gender, email);
+    public String getSpecificFlight(@PathVariable String flightno, @Valid @RequestParam String firstname,@Valid @RequestParam String lastname,@Valid @RequestParam String gender,@Valid @RequestParam String email){
+        return this.bookingService.getSpecificFlight (flightno, firstname, lastname, gender, email);
     }
 
     @PreAuthorize("hasAuthority('USER')")

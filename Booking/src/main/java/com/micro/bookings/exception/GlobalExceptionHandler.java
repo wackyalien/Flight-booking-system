@@ -10,8 +10,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.FieldError;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -82,6 +84,21 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
         return ResponseEntity.status(status).body(errors);
     }
 
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+            HttpHeaders headers, HttpStatus status, WebRequest request) {
+ 
+        logger.error(ex.getMessage());
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        ResponseEntity<Object> entity = new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        return entity;
+    }
+
     @ExceptionHandler(IdNotFoundException.class)
     public ResponseEntity<Object> handleIdNotFoundException(IdNotFoundException ex){
         String message = ex.getMessage();
@@ -89,6 +106,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
         details.add("Id not found");
         ApiErrors errors = new ApiErrors(message,details,HttpStatus.NOT_FOUND,LocalDateTime.now());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Object> handleexception(Exception ex){
+        String message=ex.getMessage();
+        List<String> details=new ArrayList<>();
+        details.add("other exception");
+        ApiErrors apiErrors=new ApiErrors(message,details,HttpStatus.BAD_REQUEST, LocalDateTime.now());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiErrors);
     }
     
 }

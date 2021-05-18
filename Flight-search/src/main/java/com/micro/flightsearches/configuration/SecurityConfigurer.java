@@ -38,7 +38,12 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
         http.csrf().disable()
                 .authorizeRequests().antMatchers("/flight/authenticate","/flight/hello",
                                                 "/flight/audience","/flight/{flightNo}",
-                                                "/flight/flightsearch").permitAll()
+                                                "/flight/flightsearch","/v2/api-docs",
+                                                "/configuration/ui",
+                                                "/swagger-resources/**",
+                                                "/configuration/security",
+                                                "/swagger-ui.html",
+                                                "/webjars/**").permitAll()
                 // .antMatchers("hello/admin").hasAuthority("ADMIN")
                 // .antMatchers("hello/user").hasAuthority("USER")
                 .anyRequest().authenticated()

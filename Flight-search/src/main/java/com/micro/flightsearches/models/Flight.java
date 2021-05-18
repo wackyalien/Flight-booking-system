@@ -1,9 +1,9 @@
 package com.micro.flightsearches.models;
 
-// import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
-import org.hibernate.validator.constraints.NotEmpty;
+// import javax.validation.constraints.NotNull;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -21,13 +21,17 @@ import lombok.ToString;
 public class Flight {
     @Id
     private int id;
-    @NotEmpty(message = "flightno is mandatory")
+    // @Size(min=5, max=7, message="flightno invalid")
+    @NotBlank(message = "flightno is mandatory")
     private String flightno;
-    @NotEmpty(message = "flightfrom is mandatory")
+    // @Size(min=1, max=5, message="flightfrom invalid")
+    @NotBlank(message = "flightfrom is mandatory")
     private String flightfrom;
-    @NotEmpty(message = "flightto is mandatory")
+    // @Size(min=1, max=5, message="flightto invalid")
+    @NotBlank(message = "flightto is mandatory")
     private String flightto;
-    @NotNull(message = "date is mandatory")
+    @Size(min=1, max=15, message="date invalid")
+    @NotBlank(message = "date is mandatory")
     private String date;
     private int fare;
     
