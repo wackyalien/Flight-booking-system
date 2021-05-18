@@ -9,9 +9,9 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.micro.Faresearch.Services.FareServicesImpl;
-import com.micro.Faresearch.models.Fare;
-import com.micro.Faresearch.models.FlightFare;
+import com.micro.faressearch.models.Fare;
+import com.micro.faressearch.models.FlightFare;
+import com.micro.faressearch.service.FareServicesImpl;
 
 import org.junit.Test;
 

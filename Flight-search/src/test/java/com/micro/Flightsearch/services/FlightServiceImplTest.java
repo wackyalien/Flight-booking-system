@@ -9,9 +9,9 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.micro.Flightsearch.models.AvailableFlight;
-import com.micro.Flightsearch.models.Flight;
-import com.micro.Flightsearch.service.FlightServiceImpl;
+import com.micro.flightsearches.models.AvailableFlight;
+import com.micro.flightsearches.models.Flight;
+import com.micro.flightsearches.service.FlightServiceImpl;
 
 import org.junit.Test;
 

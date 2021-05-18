@@ -1,12 +1,12 @@
 package com.micro.Booking.services;
 
-import com.micro.Booking.exception.IdNotFoundException;
-import com.micro.Booking.models.User;
-import com.micro.Booking.service.BookingServiceImpl;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import com.micro.bookings.exception.IdNotFoundException;
+import com.micro.bookings.models.User;
+import com.micro.bookings.service.BookingServiceImpl;
 
 import org.junit.Test;
 
