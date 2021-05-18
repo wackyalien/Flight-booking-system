@@ -24,7 +24,7 @@ public class FlightServiceImpl implements FlightService{
     private flightrepo flightrepo;
 
     @Override
-    public String postdata(Flight flight) {
+    public String postData(Flight flight) {
         logger.info("post data of flight");
         try{
             this.flightrepo.save(flight);
@@ -36,12 +36,12 @@ public class FlightServiceImpl implements FlightService{
     }
 
     @Override
-    public List<Flight> getdata() {
+    public List<Flight> getData() {
         return this.flightrepo.findAll();
     }
 
     @Override
-    public List<Flight> getallflight() {
+    public List<Flight> getAllFlight() {
         logger.info("show all flights");
         var flightfare = restTemplate.getForObject("http://fare-search/fare/getAll/", FlightFare.class);
         var f=flightfare.getFlightFare().stream().map(i->i.getFlightno()).collect(Collectors.toList());
@@ -55,7 +55,7 @@ public class FlightServiceImpl implements FlightService{
     }
 
     @Override
-    public AvailableFlight getsearchflightwithfare(String flightfrom, String flightto, String date) {
+    public AvailableFlight getSearchFlightWithFare(String flightfrom, String flightto, String date) {
         logger.info("flight search by from, to and date");
         List<Flight> AvailableFLightList = new ArrayList<>();
         var flightfare = restTemplate.getForObject("http://fare-search/fare/getAll/", FlightFare.class);
@@ -75,7 +75,7 @@ public class FlightServiceImpl implements FlightService{
     }
 
     @Override
-    public Flight getdata(String flightNo) {
+    public Flight getData(String flightNo) {
         logger.info("search flight by flightno");
         var fare = this.restTemplate.getForObject("http://fare-search/fare/"+flightNo, Fare.class);
         Flight flight=this.flightrepo.findByFlightno(flightNo);

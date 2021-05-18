@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/fare")
-public class mycontrols {
+public class MyControl{
 
     @Autowired
     private FareServices fareServices;
@@ -36,18 +36,18 @@ public class mycontrols {
     }
 
     @PostMapping("/")
-    public String postdata(@RequestBody @Valid Fare fare) {
-        return this.fareServices.postdata(fare);
+    public String postData(@RequestBody @Valid Fare fare) {
+        return this.fareServices.postData(fare);
     }
 
     @GetMapping("/")
-    public List<Fare> getdata() {
-        return this.fareServices.getdata();
+    public List<Fare> getData() {
+        return this.fareServices.getData();
     }
 
     @GetMapping("{flightno}")
-    public Fare getflight(@PathVariable String flightno) {
-        return this.fareServices.getflight(flightno);
+    public Fare getFlight(@PathVariable String flightno) {
+        return this.fareServices.getFlight(flightno);
     }
 
     @GetMapping("/getAll")

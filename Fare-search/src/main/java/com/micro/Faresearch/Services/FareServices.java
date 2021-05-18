@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 public interface FareServices {
     public FlightFare getPrice();
-    public List<Fare> getdata();
-    public String postdata(@RequestBody Fare fare);
-    public Fare getflight(@PathVariable String flightno);
+    public List<Fare> getData();
+    public String postData(@RequestBody Fare fare);
+    public Fare getFlight(@PathVariable String flightno);
 }

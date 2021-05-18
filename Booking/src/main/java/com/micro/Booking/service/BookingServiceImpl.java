@@ -43,7 +43,7 @@ public class BookingServiceImpl implements BookingService{
     }
 
     @Override
-    public String getspecificflight(String flightno, String firstname, String lastname, String gender, String email) {
+    public String getSpecificFlight(String flightno, String firstname, String lastname, String gender, String email) {
         logger.info("book flight for user");
         Random rand = new Random();
         var payment = rand.nextInt(2-0) + 0;

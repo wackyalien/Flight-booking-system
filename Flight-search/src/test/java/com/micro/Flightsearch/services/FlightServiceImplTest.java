@@ -20,62 +20,62 @@ public class FlightServiceImplTest {
     FlightServiceImpl flightServiceImplMock = mock(FlightServiceImpl.class);
 
     @Test
-    public void postdataTest(){
+    public void postDataTest(){
         Flight flight = new Flight(1,"BF101","NYC","SFO","2019-01-01",101);
-        when(flightServiceImplMock.postdata(flight)).thenReturn("Successfully added");
-        assertEquals("Successfully added", flightServiceImplMock.postdata(flight));
+        when(flightServiceImplMock.postData(flight)).thenReturn("Successfully added");
+        assertEquals("Successfully added", flightServiceImplMock.postData(flight));
     }
 
     @Test
-    public void getdataTest(){
+    public void getDataTest(){
         Flight flight1 = new Flight(1,"BF101","NYC","SFO","2019-01-01",101);
         Flight flight2 = new Flight(2,"BF102","NYC","SFO","2019-01-01",102);
         List<Flight> flightList = new ArrayList<>();
         flightList.add(flight1);
         flightList.add(flight2);
-        when(flightServiceImplMock.getdata()).thenReturn(flightList);
-        assertEquals(flightList, flightServiceImplMock.getdata());
+        when(flightServiceImplMock.getData()).thenReturn(flightList);
+        assertEquals(flightList, flightServiceImplMock.getData());
     }
 
     @Test
-    public void getallflightTest(){
+    public void getAllFlightTest(){
         Flight flight1 = new Flight(1,"BF101","NYC","SFO","2019-01-01",101);
         Flight flight2 = new Flight(2,"BF102","NYC","SFO","2019-01-01",102);
         List<Flight> flightList = new ArrayList<>();
         flightList.add(flight1);
         flightList.add(flight2);
-        when(flightServiceImplMock.getallflight()).thenReturn(flightList);
-        assertEquals(flightList, flightServiceImplMock.getallflight());
+        when(flightServiceImplMock.getAllFlight()).thenReturn(flightList);
+        assertEquals(flightList, flightServiceImplMock.getAllFlight());
 
     }
     @Test
-    public void getFlightdataTest(){
+    public void getFlightDataTest(){
         Flight flight = new Flight(1,"BF101","NYC","SFO","2019-01-01",101);
-        when(flightServiceImplMock.getdata("BF101")).thenReturn(flight);
-        assertNotEquals(flight, flightServiceImplMock.getdata("BF1012"));
+        when(flightServiceImplMock.getData("BF101")).thenReturn(flight);
+        assertNotEquals(flight, flightServiceImplMock.getData("BF1012"));
     }
 
     @Test
-    public void getsearchflightwithfareTest_withwronginput(){
+    public void getSearchFlightWithFareTest_WithWrongInput(){
         Flight flight1 = new Flight(1,"BF101","NYC","SFO","2019-01-01",101);
         Flight flight2 = new Flight(2,"BF102","NYC","SFO","2019-01-01",102);
         List<Flight> flightList = new ArrayList<>();
         flightList.add(flight1);
         flightList.add(flight2);
         AvailableFlight availableFlightList = new AvailableFlight(flightList);
-        when(flightServiceImplMock.getsearchflightwithfare("NYC","DEL","2019-01-01")).thenReturn(availableFlightList);
-        assertNotEquals(availableFlightList, flightServiceImplMock.getsearchflightwithfare("NYC","SFO","2019-01-01"));
+        when(flightServiceImplMock.getSearchFlightWithFare("NYC","DEL","2019-01-01")).thenReturn(availableFlightList);
+        assertNotEquals(availableFlightList, flightServiceImplMock.getSearchFlightWithFare("NYC","SFO","2019-01-01"));
     }
 
     @Test
-    public void getsearchflightwithfareTest(){
+    public void getSearchFlightWithFareTest(){
         Flight flight1 = new Flight(1,"BF101","NYC","SFO","2019-01-01",101);
         Flight flight2 = new Flight(2,"BF102","NYC","SFO","2019-01-01",102);
         List<Flight> flightList = new ArrayList<>();
         flightList.add(flight1);
         flightList.add(flight2);
         AvailableFlight availableFlightList = new AvailableFlight(flightList);
-        when(flightServiceImplMock.getsearchflightwithfare("NYC","SFO","2019-01-01")).thenReturn(availableFlightList);
-        assertEquals(availableFlightList, flightServiceImplMock.getsearchflightwithfare("NYC","SFO","2019-01-01"));
+        when(flightServiceImplMock.getSearchFlightWithFare("NYC","SFO","2019-01-01")).thenReturn(availableFlightList);
+        assertEquals(availableFlightList, flightServiceImplMock.getSearchFlightWithFare("NYC","SFO","2019-01-01"));
     } 
 }

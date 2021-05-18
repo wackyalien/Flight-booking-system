@@ -41,7 +41,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Validated
 @RequestMapping("/flight")
-public class mycontrols {
+public class MyControl{
 
     @Autowired
     AuthenticationManager authenticationManager;
@@ -65,8 +65,8 @@ public class mycontrols {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/")
-    public String postdata(@RequestBody @Valid Flight flight){
-            return this.flightService.postdata(flight);
+    public String postData(@RequestBody @Valid Flight flight){
+            return this.flightService.postData(flight);
     }
 
     @PostMapping("/audience")
@@ -77,18 +77,18 @@ public class mycontrols {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/all")
-    public List<Flight> getallflight(){
-        return this.flightService.getallflight();
+    public List<Flight> getAllFlight(){
+        return this.flightService.getAllFlight();
     }
 
     @GetMapping("/{flightNo}")
-    public Flight getdata(@PathVariable String flightNo){
-        return this.flightService.getdata(flightNo);
+    public Flight getData(@PathVariable String flightNo){
+        return this.flightService.getData(flightNo);
     }
 
     @GetMapping("/flightsearch")
-    public ResponseEntity<AvailableFlight> getsearchflightwithfare(@RequestParam @Valid String flightfrom,@RequestParam @Valid String flightto,@RequestParam @Valid String date){
-        var availableflight= this.flightService.getsearchflightwithfare(flightfrom, flightto, date);
+    public ResponseEntity<AvailableFlight> getSearchFlightWithFare(@RequestParam @Valid String flightfrom,@RequestParam @Valid String flightto,@RequestParam @Valid String date){
+        var availableflight= this.flightService.getSearchFlightWithFare(flightfrom, flightto, date);
         if (availableflight.getAvailableflight().size()==0){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }

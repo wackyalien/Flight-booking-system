@@ -20,28 +20,28 @@ public class FareServicesImplTest {
     FareServicesImpl fareServiceImplMock = mock(FareServicesImpl.class);
 
     @Test
-    public void postdataTest(){
+    public void postDataTest(){
         Fare fareList = new Fare(null,"BF101",101);
-        when(fareServiceImplMock.postdata(fareList)).thenReturn("Successfully added");
-        assertEquals("Successfully added", fareServiceImplMock.postdata(fareList));
+        when(fareServiceImplMock.postData(fareList)).thenReturn("Successfully added");
+        assertEquals("Successfully added", fareServiceImplMock.postData(fareList));
     }
 
     @Test
-    public void getdataTest(){
+    public void getDataTest(){
         Fare fareList1 = new Fare(null,"BF101",101);
         Fare fareList2 = new Fare(null,"BF101",101);
         List<Fare> farelist = new ArrayList<Fare>();
         farelist.add(fareList1);
         farelist.add(fareList2);
-        when(fareServiceImplMock.getdata()).thenReturn(farelist);
-        assertEquals(farelist, fareServiceImplMock.getdata());
+        when(fareServiceImplMock.getData()).thenReturn(farelist);
+        assertEquals(farelist, fareServiceImplMock.getData());
     }
 
     @Test
-    public void getflightTest(){
+    public void getFlightTest(){
         Fare fareList = new Fare(null,"BF101",101);
-        when(fareServiceImplMock.getflight("BF101")).thenReturn(fareList);
-        assertEquals(fareList, fareServiceImplMock.getflight("BF101"));
+        when(fareServiceImplMock.getFlight("BF101")).thenReturn(fareList);
+        assertEquals(fareList, fareServiceImplMock.getFlight("BF101"));
     }
 
     @Test

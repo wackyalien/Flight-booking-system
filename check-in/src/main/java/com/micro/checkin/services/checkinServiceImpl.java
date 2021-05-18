@@ -24,7 +24,7 @@ public class checkinServiceImpl implements checkinService{
     }
 
     @Override
-    public CheckingMessage checkin(int id) { 
+    public CheckingMessage checkIn(int id) { 
         
         logger.info("Sending asyn message to booking microservice using rabbitmq");
         if (userrepo.findAll().size()>=id){

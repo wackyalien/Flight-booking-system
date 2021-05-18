@@ -31,14 +31,14 @@ public class BookingServiceImplTest {
 
     @Test
     public void getspecificflightTest(){
-        when(bookingServiceImplMock.getspecificflight("BF101", "kunal", "jain", "male", "scxsdc")).thenReturn("Check booking details on your Email");
-        assertEquals("Check booking details on your Email", bookingServiceImplMock.getspecificflight("BF101", "kunal", "jain", "male", "scxsdc"));
+        when(bookingServiceImplMock.getSpecificFlight("BF101", "kunal", "jain", "male", "scxsdc")).thenReturn("Check booking details on your Email");
+        assertEquals("Check booking details on your Email", bookingServiceImplMock.getSpecificFlight("BF101", "kunal", "jain", "male", "scxsdc"));
     }
 
     @Test
     public void getspecificflightTest_paymentfailed(){
-        when(bookingServiceImplMock.getspecificflight("BF101", "kunal", "jain", "male", "scxsdc")).thenReturn("Payment failed");
-        assertEquals("Payment failed", bookingServiceImplMock.getspecificflight("BF101", "kunal", "jain", "male", "scxsdc"));
+        when(bookingServiceImplMock.getSpecificFlight("BF101", "kunal", "jain", "male", "scxsdc")).thenReturn("Payment failed");
+        assertEquals("Payment failed", bookingServiceImplMock.getSpecificFlight("BF101", "kunal", "jain", "male", "scxsdc"));
     }
     
 }

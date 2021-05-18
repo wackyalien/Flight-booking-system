@@ -14,13 +14,13 @@ public class FareServicesImpl implements FareServices {
     private farerepo farerepo;
 
     @Override
-    public String postdata(Fare fare) {
+    public String postData(Fare fare) {
         this.farerepo.save(fare);
         return "Successfully added";
     }
 
     @Override
-    public List<Fare> getdata() {
+    public List<Fare> getData() {
         return this.farerepo.findAll();
     }
     
@@ -32,7 +32,7 @@ public class FareServicesImpl implements FareServices {
     }
 
     @Override
-    public Fare getflight(String flightno) {
+    public Fare getFlight(String flightno) {
         return this.farerepo.findByFlightno(flightno);
     }
     
