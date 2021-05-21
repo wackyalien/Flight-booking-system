@@ -1,5 +1,6 @@
 package com.micro.bookings.service;
 
+import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 
@@ -12,12 +13,16 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import com.micro.bookings.exception.IdNotFoundException;
+import com.micro.bookings.filters.JwtRequestFilter;
 import com.micro.bookings.models.Flight;
 import com.micro.bookings.models.User;
+import com.micro.bookings.repository.AudienceRepo;
 import com.micro.bookings.repository.Bookingrepo;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -32,14 +37,35 @@ public class BookingServiceImpl implements BookingService{
     @Autowired
     private Bookingrepo bookingrepo;
 
+    @Autowired
+    private AudienceRepo audienceRepo;
+
+    @Autowired
+    private JwtRequestFilter filters;
+
     @Override
     public User getRefDetail(int id) {
         logger.info("search by id");
-        User user=this.bookingrepo.findById(id);
-        if(user == null){
+        var loggedInUser=filters.getLoggedInUserName();
+        var audienceList = this.audienceRepo.findByUsername(loggedInUser).getBookingid();
+        System.out.println(audienceList);
+        if (audienceList.contains(id)){
+            User user=this.bookingrepo.findById(id);
+            return user;
+        }
+        else{
             throw new IdNotFoundException("Invalid Id");
         }
-        return user;
+    }
+
+    public void updateBookingIds(int id){
+        var loggedInUser=filters.getLoggedInUserName();
+        var audience = this.audienceRepo.findByUsername(loggedInUser);
+        var updatevalue = audience.getBookingid();
+        updatevalue.add(id);
+        audience.setBookingid(updatevalue);
+        audienceRepo.save(audience);
+        System.out.println(audience);
     }
 
     @Override
@@ -91,6 +117,7 @@ public class BookingServiceImpl implements BookingService{
             message.setText("Your booking is confirmed. Reference number is "+user.getId());
             Transport.send(message);
             System.out.println("Mail successfully sent");
+            updateBookingIds(user.getId());
             }
             catch (MessagingException mex) 
             {

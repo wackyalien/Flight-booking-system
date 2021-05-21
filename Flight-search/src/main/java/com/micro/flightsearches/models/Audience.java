@@ -1,5 +1,7 @@
 package com.micro.flightsearches.models;
 
+import java.util.List;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -22,6 +24,7 @@ public class Audience {
     private String username;
     private String password;
     private String role;
+    private List<Integer> bookingid;
 
 }
 

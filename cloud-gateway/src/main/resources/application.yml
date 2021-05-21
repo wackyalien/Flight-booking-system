@@ -15,10 +15,16 @@ spring:
                   uri: lb://fare-search
                   predicates:
                     - Path=/fare/**
+                  metadata:
+                    response-timeout: 2000
+                    connect-timeout: 2000
                 - id: flight-search
                   uri: lb://flight-search
                   predicates:
                     - Path=/flight/**
+                  metadata:
+                    response-timeout: 2000
+                    connect-timeout: 2000
                   filters:
                     - name: CircuitBreaker
                       args:
@@ -28,6 +34,9 @@ spring:
                   uri: lb://booking-service
                   predicates:
                     - Path=/booking/**
+                  metadata:
+                    response-timeout: 2000
+                    connect-timeout: 2000
                   filters:
                     - name: CircuitBreaker
                       args:
@@ -37,13 +46,11 @@ spring:
                   uri: lb://check-in
                   predicates:
                     - Path=/**
+                  metadata:
+                    response-timeout: 2000
+                    connect-timeout: 2000
                   filters:
                     - name: CircuitBreaker
                       args:
                         name: fallbackCommand
                         fallbackuri: forward:/fallback/message 
-
-
-
-
-
